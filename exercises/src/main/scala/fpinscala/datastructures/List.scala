@@ -60,7 +60,10 @@ object List { // `List` companion object. Contains functions for creating and wo
     case Cons(_, t) => Cons(h, t)
   }
 
-  def drop[A](l: List[A], n: Int): List[A] = sys.error("todo")
+  @annotation.tailrec
+  def drop[A](l: List[A], n: Int): List[A] =
+    if (n > 0) drop(tail(l), n - 1)
+    else l
 
   def dropWhile[A](l: List[A], f: A => Boolean): List[A] = sys.error("todo")
 
