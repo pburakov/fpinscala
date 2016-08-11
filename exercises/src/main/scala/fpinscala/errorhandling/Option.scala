@@ -19,6 +19,9 @@ sealed trait Option[+A] {
     case Some(a) => f(a)
   }
 
+  def flatMapViaMap[B](f: A => Option[B]): Option[B] =
+    map(f).getOrElse(None)
+
   def orElse[B>:A](ob: => Option[B]): Option[B] = sys.error("todo")
 
   def filter(f: A => Boolean): Option[A] = sys.error("todo")
